@@ -33,22 +33,22 @@ def model():
     model.add(MaxPooling2D(pool_size = (2, 2)))
     model.add(Dropout(0.2))
     model.add(Flatten())
-    model.add(Dense(128, activation='relu'))
-    model.add(Dense(NUM_CLASSES, activation='softmax'))
+    model.add(Dense(128, activation = 'relu'))
+    model.add(Dense(NUM_CLASSES, activation = 'softmax'))
 
     # define the object function, optimizer and metrics
-    model.compile(loss='categorical_crossentropy', optimizer=keras.optimizers.Adadelta(), metrics=['accuracy'])
+    model.compile(loss = 'categorical_crossentropy', optimizer = keras.optimizers.Adadelta(), metrics = ['accuracy'])
 
     return model
 
 
 md = model()
 # train
-model.fit(x_train, y_train, validation_data=(x_test, y_test), nb_epoch=10, batch_size=128, verbose=2)
+md.fit(x_train, y_train, validation_data=(x_test, y_test), nb_epoch=10, batch_size=128, verbose=2)
 
 # evaluate
-score_train = model.evaluate(x_train, y_train)
+score_train = md.evaluate(x_train, y_train)
 print('Training loss: %.4f, Training accuracy: %.2f%%' % (score_train[0]*100, score_train[1]*100))
 
-score_test = model.evaluate(x_test, y_test, verbose=0)
+score_test = md.evaluate(x_test, y_test, verbose = 0)
 print('Testing loss: %.4f, Testing accuracy: %.2f%%' % (score_test[0]*100, score_test[1]*100))
